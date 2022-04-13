@@ -3,10 +3,18 @@ import { renderTasks } from "./render.js";
 
 export const onToggleTask = (event) => {
   let tasksList = getTasks();
-  const updateTaskId = event.target.firstChild.dataset.id;
+  let eventId;
+
+  if (event.target.classList.contains("list__item-checkbox")) {
+    eventId = event.target.dataset.id;
+  }
+
+  if (event.target.classList.contains("list__item")) {
+    eventId = event.target.firstChild.dataset.id;
+  }
 
   tasksList = tasksList.map((task) => {
-    if (task.id === updateTaskId) {
+    if (task.id === eventId) {
       task.done = !task.done;
       task.act = new Date();
     }
